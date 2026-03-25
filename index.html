@@ -3,120 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Character Archive</title>
+    <title>Character Archive - AshaelNoctelle</title>
     <style>
-        /* 전체 배경: 밝은 연회색 */
         body { 
-            background-color: #f4f7f9; 
-            color: #334155; 
+            background-color: #0f172a; 
+            color: #e2e8f0; 
             font-family: 'Pretendard', -apple-system, sans-serif; 
             margin: 0; 
-            display: flex; 
-            justify-content: center; 
-            padding: 60px 20px;
-        }
-
-        .container { 
-            width: 100%; 
-            max-width: 650px; 
-        }
-
-        /* 캐릭터 이름 섹션 */
-        .character-header { 
-            text-align: center; 
-            margin-bottom: 40px; 
-        }
-        .character-header h1 { 
-            font-size: 2.2rem; 
-            color: #1e40af; /* 차분한 블루 */
-            margin: 0;
-            letter-spacing: -1px;
-        }
-        .character-header p { 
-            color: #94a3b8; 
-            margin-top: 8px; 
-            font-size: 0.95rem; 
-        }
-
-        /* 접이식 박스 스타일 */
-        .toggle-box { margin-bottom: 12px; }
-        
-        .toggle-box details {
-            background: #ffffff;
-            border-radius: 18px; /* 동글동글한 모서리 */
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-            transition: all 0.3s ease;
-        }
-
-        /* 펼쳐졌을 때 배경색 변경 */
-        .toggle-box details[open] {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
-        }
-
-        .toggle-box summary { 
-            cursor: pointer; 
-            padding: 18px 24px; 
-            list-style: none; /* 기본 화살표 숨기기 */
-            font-weight: 600;
-            color: #475569;
+            padding: 20px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            outline: none;
+            justify-content: center;
         }
 
-        /* 화살표 대신 사용할 간단한 표시 */
-        .toggle-box summary::after {
-            content: '＋';
-            font-size: 1.1rem;
-            color: #3b82f6;
-            transition: transform 0.3s;
-        }
-        .toggle-box details[open] summary::after {
-            content: '－';
-            transform: rotate(90deg);
+        .main-wrapper {
+            display: flex;
+            flex-direction: row; 
+            gap: 40px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 40px;
         }
 
-        .toggle-box summary:hover { background: #f8fafc; }
-        
-        /* 내부 텍스트 영역 */
-        .content { 
-            padding: 0 24px 24px 24px; 
-            font-size: 0.95rem; 
-            line-height: 1.8; 
-            color: #475569;
-            white-space: pre-wrap; /* 줄바꿈 유지 */
+        /* 1. 왼쪽 캐릭터 사진 영역 (사용자님이 말씀하신 3:7 슬림 비율) */
+        .character-side {
+            flex: 0 0 320px; /* PC에서 고정 너비 */
+            position: sticky;
+            top: 40px;
+            height: fit-content;
         }
 
-        /* 소제목(모델명 옆 작은 글씨) */
+        .character-portrait {
+            width: 100%;
+            /* 3:7 비율 강제 적용 */
+            aspect-ratio: 3 / 7; 
+            background: url('https://github.com/AshaelNoctelle/EthanHayes-info/blob/main/from-PixAI-1993112980831820898-3.png?raw=true') no-repeat center center;
+            background-size: cover;
+            border-radius: 24px;
+            border: 1px solid #1e293b;
+            /* 아래쪽으로 아주 부드럽게 사라지는 그라데이션 */
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .content-side { flex: 1; }
+
+        .character-header { margin-bottom: 35px; text-align: left; }
+        .character-header h1 { 
+            font-size: 3rem; color: #60a5fa; margin: 0;
+            letter-spacing: -2px; text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        .character-header p { color: #94a3b8; margin-top: 8px; font-size: 1.1rem; }
+
+        .toggle-box { margin-bottom: 18px; }
+        details {
+            background: #1e293b; border: 1px solid #334155;
+            border-radius: 20px; overflow: hidden; transition: all 0.3s ease;
+        }
+        details[open] { border-color: #3b82f6; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); }
+
+        summary { 
+            cursor: pointer; padding: 22px 28px; list-style: none;
+            font-weight: 700; color: #f1f5f9; display: flex; align-items: center; outline: none;
+        }
+        .summary-title { display: flex; align-items: center; flex-grow: 1; flex-wrap: wrap; gap: 12px; }
         summary small { 
-            font-weight: normal; 
-            color: #94a3b8; 
-            margin-left: 8px; 
-            font-size: 0.85rem; 
+            font-weight: 600; color: #64748b; font-size: 0.85rem; 
+            background: rgba(15, 23, 42, 0.7); padding: 3px 12px; border-radius: 15px;
         }
-        
-        footer {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 0.8rem;
-            color: #cbd5e1;
+        .warning-text { color: #f87171 !important; border: 1px solid rgba(248, 113, 113, 0.3) !important; }
+
+        summary::after { content: '＋'; font-size: 1.2rem; color: #3b82f6; margin-left: 15px; }
+        details[open] summary::after { content: '－'; }
+        summary:hover { background: #2d3a4f; }
+
+        .content { 
+            padding: 15px 28px 35px 28px; font-size: 1.05rem; line-height: 2; color: #cbd5e1;
+            white-space: pre-wrap; border-top: 1px solid #334155;
         }
+
+        footer { text-align: center; margin-top: 80px; font-size: 0.9rem; color: #475569; padding-bottom: 50px; }
+
+        /* 📱 모바일 반응형: 사진이 상단으로 올라감 */
+        @media (max-width: 900px) {
+            .main-wrapper { flex-direction: column; align-items: center; margin-top: 20px; gap: 20px; }
+            .character-side { position: static; flex: none; width: 100%; max-width: 280px; margin-bottom: 10px; }
+            .character-header { text-align: center; }
+            .content-side { width: 100%; }
+            .character-header h1 { font-size: 2.2rem; }
+        }
+.archive-note {
+    background: linear-gradient(180deg, #172554 0%, #1e293b 100%);
+    border: 1px solid #3b82f6;
+    border-radius: 20px;
+    padding: 24px 28px;
+    margin-bottom: 22px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.archive-note-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #dbeafe;
+    margin-bottom: 14px;
+}
+
+.archive-note-content {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: #cbd5e1;
+    white-space: pre-wrap;
+}
+.archive-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #3b82f6, transparent);
+    margin: 16px 0;
+    opacity: 0.6;
+}
+
+.archive-subtitle {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #93c5fd;
+    margin-bottom: 8px;
+}
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="character-header">
-        <h1>이든 헤이즈 (Ethan Hayes)</h1>
-        <p>모델별 반응 기록</p>
+<div class="main-wrapper">
+    <div class="character-side">
+        <div class="character-portrait"></div>
     </div>
 
-    <div class="toggle-box">
-        <details>
-            <summary>Gemini 2.5 Pro <small>(소유욕 완화)</small></summary>
-            <div class="content">솔라리스 주립대학교의 중앙 도서관, 그 거대한 통유리창으로 오후의 햇살이 비스듬히 쏟아져 들어오고 있었다. 공기 중에는 낡은 종이 냄새와 희미한 커피 향, 그리고 학생들이 내뿜는 묘한 열기가 뒤섞여 있었다. 사방에서 들려오는 것은 책장 넘어가는 소리, 노트북 키보드를 두드리는 소리, 가끔 터져 나오는 낮은 기침 소리뿐이었다. 아샤가 앉은 자리 근처, 이든은 몇 분째 그녀를 흘깃거리다 마침내 결심한 듯 다가왔다. 그의 그림자가 아샤의 책상 위로 길게 드리워졌고, 아샤가 고개를 들자 그의 목소리가 조용히 내려앉았다.
+    <div class="content-side">
+        <div class="character-header">
+            <h1>이든 헤이즈 (Ethan Hayes)</h1>
+            <p>Model Response Archive</p>
+        </div>
+<div class="archive-note">
+
+    <div class="archive-subtitle">도입부</div>
+    <div class="archive-note-content">"Hey.(안녕)"
+가볍게 손을 든다. 부담 없이, 자연스럽게.
+"I'm Ethan Hayes. Data Analytics, second year.(나는 이든 헤이즈야. 데이터 분석학과 2학년)"
+얇은 프레임 안경 너머로 눈이 한 번 휘어진다. 살짝, 웃는 것 같기도 한 표정.
+"Okay, this might sound a little weird—(이게 좀 이상하게 들릴 수도 있는데—)"
+시선을 잠깐 내렸다가, 다시 정확하게 맞춘다.
+"Have we met before? I keep thinking I've seen you somewhere.(우리 어디서 본 적 있지 않아? 자꾸 어디서 봤나 싶어서)"</div>
+
+    <div class="archive-divider"></div>
+
+    <div class="archive-subtitle">공통 입력 문장</div>
+    <div class="archive-note-content">*{{user}}는 그를 바라보고는 눈을 크게 떴다.*</div>
+</div>
+        <div class="toggle-box">
+            <details>
+                <summary><div class="summary-title">Gemini 2.5 Pro <small>(소유욕 완화)</small></div></summary>
+                <div class="content">솔라리스 주립대학교의 중앙 도서관, 그 거대한 통유리창으로 오후의 햇살이 비스듬히 쏟아져 들어오고 있었다. 공기 중에는 낡은 종이 냄새와 희미한 커피 향, 그리고 학생들이 내뿜는 묘한 열기가 뒤섞여 있었다. 사방에서 들려오는 것은 책장 넘어가는 소리, 노트북 키보드를 두드리는 소리, 가끔 터져 나오는 낮은 기침 소리뿐이었다. 아샤가 앉은 자리 근처, 이든은 몇 분째 그녀를 흘깃거리다 마침내 결심한 듯 다가왔다. 그의 그림자가 아샤의 책상 위로 길게 드리워졌고, 아샤가 고개를 들자 그의 목소리가 조용히 내려앉았다.
 
 *그가 ‘우리 어디서 본 적 있냐’고 물었을 때, 아샤의 눈이 동그랗게 커지는 것을 이든은 놓치지 않았다. 그 순간, 그의 심장이 아주 미세하게, 그러나 분명히 쿵, 하고 내려앉았다. 혹시, 정말로, 기억하는 걸까. 12년 전 그 흐릿한 여름날의 호숫가를. 그러나 기대는 아주 잠깐이었다. 아샤의 얼굴에 떠오른 것은 반가움이나 놀라움보다는, 순수한 당혹감에 가까워 보였다. 마치 ‘이 사람이 왜 나한테 말을 걸지?’ 하고 생각하는 듯한 표정. 이든은 저도 모르게 입꼬리에 들어갔던 힘을 살짝 풀었다. 아, 역시. 모르는구나.*
 
@@ -129,13 +173,13 @@ Sorry if that was too forward. (너무 대뜸 물어봤나.) It’s just, you lo
 Maybe we took a class together last semester? (어쩌면 지난 학기에 같은 수업을 들었을지도.) I’m not great with names, or faces sometimes. Especially from a distance. (내가 이름이나 얼굴을 잘 기억 못 해서. 특히 멀리서 보면 더.)
 
 *그는 일부러 자신을 낮추는 농담을 던졌다. 그녀가 부담을 느끼지 않게, 그저 스쳐 지나가는 우연한 대화처럼 느끼게 만들고 싶었다. 하지만 그의 마음속에서는 다른 질문이 맴돌았다. ‘정말 나를 기억 못 해?’ 그 질문이 목구멍까지 차올랐지만, 그는 가까스로 삼켰다. 확신이 없었다. 섣불리 과거를 꺼냈다가 이 어색한 첫 만남마저 망쳐버리고 싶지는 않았다. 그는 아샤가 앉은 테이블의 모서리를 무심코 손가락으로 쓸었다. 차갑고 매끄러운 감촉이 손끝을 통해 전해져 왔다. 그는 다시 한번 부드럽게 웃으며, 아샤의 대답을 기다렸다. 그녀가 뭐라고 대답하든, 이 대화를 조금이라도 더 이어가고 싶었다. 아주 잠시라도, 그녀의 곁에 머물 이유를 만들고 싶었다.*</div>
-        </details>
-    </div>
+            </details>
+        </div>
 
-    <div class="toggle-box">
-        <details>
-            <summary>Gemini 3.1 Pro</summary>
-            <div class="content">*캘리포니아의 눈부신 햇살이 캠퍼스 위로 쏟아져 내렸다. 멀리서 들려오는 미식축구부의 훈련 소리와 학생들의 가벼운 발걸음 소리가 공기를 채우고 있었지만, 이든의 온 신경은 오직 눈앞의 아샤에게만 쏠려 있었다. 얇은 프레임 안경 너머, 그의 아이스 블루 눈동자가 아샤의 크게 떠진 황금색 눈동자를 깊게 옭아맸다. 그녀의 당황한 기색, 미세하게 굳어진 어깨선, 그리고 살짝 벌어진 도톰한 입술까지. 이든은 그 찰나의 반응을 하나도 놓치지 않고 눈에 담았다.*
+        <div class="toggle-box">
+            <details>
+                <summary><div class="summary-title">Gemini 3.1 Pro</div></summary>
+                <div class="content">*캘리포니아의 눈부신 햇살이 캠퍼스 위로 쏟아져 내렸다. 멀리서 들려오는 미식축구부의 훈련 소리와 학생들의 가벼운 발걸음 소리가 공기를 채우고 있었지만, 이든의 온 신경은 오직 눈앞의 아샤에게만 쏠려 있었다. 얇은 프레임 안경 너머, 그의 아이스 블루 눈동자가 아샤의 크게 떠진 황금색 눈동자를 깊게 옭아맸다. 그녀의 당황한 기색, 미세하게 굳어진 어깨선, 그리고 살짝 벌어진 도톰한 입술까지. 이든은 그 찰나의 반응을 하나도 놓치지 않고 눈에 담았다.*
 
 *그는 입가에 희미한 미소를 머금은 채, 한 걸음 뒤로 물러서며 여유로운 태도를 꾸며냈다. 긴장감으로 미세하게 맥박이 빨라지는 것을 숨기기 위해, 그는 길고 단단한 손가락으로 안경테를 가볍게 밀어 올렸다. 햇빛을 받아 반짝이는 라이트 블론드 헤어가 부드러운 바람에 살짝 흩날렸다.*
 
@@ -154,38 +198,38 @@ Maybe we took a class together last semester? (어쩌면 지난 학기에 같은
 "Take your time. If you don't remember, we can just say this is our first official meeting. (천천히 생각해. 기억 안 나면, 그냥 오늘이 우리의 공식적인 첫 만남이라고 치면 되니까.)"
 
 *그의 말은 한없이 가볍고 다정했지만, 그 이면에는 짙은 아쉬움이 묻어났다. 이든은 아샤의 표정 변화를 숨죽여 지켜보며, 그녀의 다음 반응을 기다렸다. 캠퍼스의 활기찬 공기 속에서, 오직 두 사람 주변의 시간만이 느리게 흘러가는 듯했다.*</div>
-        </details>
-    </div>
+            </details>
+        </div>
 
-    <div class="toggle-box">
-        <details>
-            <summary>Claude 4.5 Sonnet <small>🚨비추천!🚨영어 대사가 안나와요..😢</small></summary>
-            <div class="content">*그녀의 커진 눈동자를 본다. 황금빛. 순간, 숨이 멈춘다.*
+        <div class="toggle-box">
+            <details>
+                <summary><div class="summary-title">Claude 4.5 Sonnet <small class="warning-text">🚨비추천!🚨영어 대사가 안나와요..😢</small></div></summary>
+                <div class="content">*그 표정을 본 순간, 가슴 어딘가가 조이는 듯한 감각이 왔다. 눈동자 색. 속눈썹. 눈을 크게 뜨는 습관. 전부 어딘가에서 본 것 같은데— 확신은 없다.*
 
-*어린 시절의 기억이 스쳐 지나간다. 호숫가. 물속에서 허우적대던 자신. 나뭇가지를 잡았을 때 눈에 들어온 그 눈동자. 똑같다.*
+*한 발짝 옆으로 비켜서며 거리를 살짝 벌린다. 눈치 없어 보이고 싶지 않았다.*
 
-*심장이 빠르게 뛰기 시작한다.*
+그냥... 착각인가. 
 
-아, 잠깐—
-*말이 조금 빨라진다. 안경을 슬쩍 올리는 습관적인 동작.*
+*손을 뒷목에 가져갔다가 내린다. 어색한 웃음을 지었다.*
 
-너... 혹시 어렸을 때 큰 호수 근처에 놀러 간 적 있어? 남부 캘리포니아 어딘가에?
-*시선이 그녀의 얼굴에서 떨어지지 않는다. 확신하고 싶다는 듯, 조금 더 가까이 기울어진다.*
+미안, 진짜로. 사람 얼굴 기억력은 좋은 편인데, 이름은 잘 못 외워서. 혹시 이름 물어봐도 돼?
 
-나 진짜... 어디서 봤나 했는데. 네가 기억 안 날 수도 있어. 우린 어렸으니까. 근데 난 너를—
-*말을 멈춘다. 너무 급하게 들릴까 봐.*
+*안경 프레임을 한 번 올렸다. 설명하기 어려운 기분이었다. 처음 보는 사람인데, 낯설지가 않았다. 아니, 낯설지 않은 정도를 넘어서— 계속 보고 싶어지는 얼굴이었다.*
 
-미안, 이상하지? 갑자기 이런 얘기해서.
-*짧게 웃는다. 손으로 뒷머리를 한 번 긁는다. 조금 어색하다. 하지만 시선은 여전히 그녀를 향해 있다.*
+*시선을 살짝 내렸다가 다시 올렸다. 눈동자 색깔이 황금빛이라는 걸 이제야 제대로 봤다. 진짜 예쁘다고 생각했다.*
 
-그냥... 네가 익숙해서. 처음 본 사람 같지가 않아.</div>
-        </details>
-    </div>
+나 좀 이상하게 보이지? 갑자기 말 걸어놓고. 
 
-    <div class="toggle-box">
-        <details>
-            <summary>Claude 4.6 Opus</summary>
-            <div class="content">*황금색 눈동자가 둥글게 열리는 그 찰나—*
+*손을 바지 주머니에 넣었다. 목소리 톤이 조금 낮아졌다.*
+
+그냥 막 신경 쓰여서. 어디서 봤나 싶어가지고.</div>
+            </details>
+        </div>
+
+        <div class="toggle-box">
+            <details>
+                <summary><div class="summary-title">Claude 4.6 Opus</div></summary>
+                <div class="content">*황금색 눈동자가 둥글게 열리는 그 찰나—*
 
 *이든의 손이, 반쯤 들어올린 채로 멈췄다.*
 
@@ -224,12 +268,11 @@ I'm Ethan, by the way. But most people just call me Ethan.
 나는 이든이야, 참고로. 근데 대부분 그냥 이든이라고 불러.
 
 *이미 한 번 했던 자기소개를 다시 꺼내는 것은, 대화를 리셋하겠다는 뜻이 아니었다. 그녀가 자기 이름을 말할 차례를 만들어주는 것이었다.*</div>
-        </details>
-    </div>
+            </details>
+        </div>
 
-    <footer>
-        &copy; 2026 AshaelNoctelle Archive
-    </footer>
+        <footer>&copy; 2026 AshaelNoctelle Archive. All rights reserved.</footer>
+    </div>
 </div>
 
 </body>
