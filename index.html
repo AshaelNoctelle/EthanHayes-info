@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캐릭터 상세 설정집</title>
+    <style>
+        /* 기본 배경 및 폰트 설정 */
+        body { 
+            background-color: #f4f7f9; /* 밝은 연회색 바탕 */
+            color: #334155; 
+            font-family: 'Pretendard', sans-serif; 
+            margin: 0; 
+            line-height: 1.8; 
+            word-break: keep-all;
+        }
+        
+        .container { 
+            max-width: 700px; 
+            margin: 0 auto; 
+            padding: 80px 24px; 
+        }
+        
+        /* 헤더: 동글동글한 박스 스타일 */
+        header { 
+            text-align: center; 
+            margin-bottom: 80px; 
+            background: #ffffff; 
+            padding: 50px 20px;
+            border-radius: 40px; /* 아주 둥글게 */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        
+        h1 { 
+            font-size: 2.5rem; 
+            color: #1e40af; /* 깊은 푸른색 */
+            margin: 10px 0; 
+            letter-spacing: -1px;
+        }
+        
+        .subtitle { 
+            color: #94a3b8; 
+            font-size: 0.9rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px;
+        }
+
+        /* 섹션 카드 스타일 */
+        section { 
+            background: #ffffff;
+            margin-bottom: 40px; 
+            padding: 40px;
+            border-radius: 30px; /* 동글동글한 모서리 */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px); /* 살짝 떠오르는 효과 */
+        }
+
+        h2 { 
+            display: inline-block;
+            background: #dbeafe; /* 연한 블루 배경 */
+            color: #1e40af; 
+            padding: 8px 20px;
+            border-radius: 20px; /* 캡슐 모양 */
+            font-size: 1.2rem; 
+            margin-bottom: 25px; 
+        }
+        
+        /* 정보 리스트 스타일 */
+        .info-grid { 
+            display: grid; 
+            grid-template-columns: 100px 1fr; 
+            gap: 12px; 
+        }
+        
+        .label { 
+            color: #64748b; 
+            font-weight: bold; 
+            font-size: 0.95rem;
+        }
+        
+        /* 강조 텍스트 (블루 포인트) */
+        .highlight { 
+            color: #3b82f6; 
+            font-weight: 600; 
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+        
+        /* 푸터 */
+        footer { 
+            text-align: center; 
+            color: #94a3b8; 
+            font-size: 0.8rem; 
+            margin-top: 60px;
+        }
+
+        /* 모바일 대응 */
+        @media (max-width: 600px) {
+            .container { padding: 40px 16px; }
+            section { padding: 30px 20px; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <p class="subtitle">Character Profile</p>
+        <h1>캐릭터 이름</h1>
+        <p style="color:#64748b;">로판 AI 세계관 상세 기록 페이지</p>
+    </header>
+
+    <section>
+        <h2>기본 프로필</h2>
+        <div class="info-grid">
+            <div class="label">나이</div> <div>20세</div>
+            <div class="label">소속</div> <div>성기사단</div>
+            <div class="label">능력</div> <div>정화의 빛</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>성격 및 특징</h2>
+        <p>평소에는 차분하고 다정하지만, 전투가 시작되면 <span class="highlight">누구보다 냉정한 판단력</span>을 보여줍니다. 동글동글한 인상과 달리 단호한 성격을 지닌 반전 매력이 있습니다.</p>
+    </section>
+
+    <section>
+        <h2>중요 설정</h2>
+        <p>가문에서 버림받았던 유년 시절을 보냈지만, 현재는 자신의 운명을 스스로 개척해 나가는 중입니다. 이 페이지에 다 담기 힘든 <span class="highlight">긴 서사</span>를 이곳에서 자유롭게 풀어낼 예정입니다.</p>
+    </section>
+
+    <footer>
+        &copy; 2026 AILELIER Design Studio.
+    </footer>
+</div>
+
+</body>
+</html>
